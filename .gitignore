@@ -1,0 +1,24 @@
+# Binaries
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+
+# Output of go coverage tool
+*.out
+
+# Dependency directories
+# vendor/
+
+# Go modules cache
+/go.sum
+/go.mod
+
+# Output files
+*.log
+*.tar
+*.gz
+*.zip
