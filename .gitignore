@@ -13,10 +13,6 @@
 # Dependency directories
 # vendor/
 
-# Go modules cache
-/go.sum
-/go.mod
-
 # Output files
 *.log
 *.tar
