@@ -52,6 +52,8 @@ jobs:
   initiate_cd:
     needs: build-and-push
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - name: Invoke CD workflow
       uses: peter-evans/repository-dispatch@v2.1.2
