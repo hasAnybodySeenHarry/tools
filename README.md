@@ -46,4 +46,10 @@ If you need a little warm-up, there are a few resources I can point you to.
 
 ### Installation
 
+## Contributing
 
+If you're interested in contributing to this project, please follow the guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+This project is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License](LICENSE.md) - see the [LICENSE.md](LICENSE.md) file for details.
