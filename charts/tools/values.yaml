@@ -2,8 +2,16 @@ replicaCount: 2
 image:
   repository: harry2an/tools
   tag: latest
+
 service:
   port: 80
   containerPort: 3000
+
 ingress:
   enabled: true
+targetGroupARN: ""
+
+hpa:
+  minReplicas: 1
+  maxReplicas: 12
+  targetCPUUtilizationPercentage: 55

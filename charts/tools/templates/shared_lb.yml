@@ -1,0 +1,10 @@
+apiVersion: elbv2.k8s.aws/v1beta1
+kind: TargetGroupBinding
+metadata:
+  name: main-lb
+  namespace: default
+spec:
+  serviceRef:
+    name: {{ .Release.Name }}-service
+    port: {{ .Values.service.port }}
+  targetGroupARN: {{ .Values.targetGroupARN }}
