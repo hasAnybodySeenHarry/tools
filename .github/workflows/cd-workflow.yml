@@ -14,5 +14,5 @@ jobs:
       run: echo "Hello world from CD"
 
     - name: Modify the helm values
-      run: echo "Image tag is ${{ needs.CI.outputs.imageTag }}"
+      run: echo "Image is ${{ needs.CI.outputs.image }}"
   
