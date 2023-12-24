@@ -1,0 +1,15 @@
+name: CD
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+    - completed
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Echo Hello
+      run: echo "Hello world from CD"
+  

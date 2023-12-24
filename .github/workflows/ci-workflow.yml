@@ -1,4 +1,4 @@
-name: Go
+name: CI
 
 on:
   push:
@@ -43,6 +43,6 @@ jobs:
       with:
         context: .
         file: ./Dockerfile
-        push: false
+        push: true
         tags: |
-          docker-username/docker-repo:latest
+          harry2an/tools:latest
