@@ -12,4 +12,7 @@ jobs:
     steps:
     - name: Echo Hello
       run: echo "Hello world from CD"
+
+    - name: Modify the helm values
+      run: echo "Image tag is ${{ needs.CI.outputs.imageTag }}"
   
