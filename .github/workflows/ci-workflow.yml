@@ -24,6 +24,8 @@ jobs:
       run: go test -v ./...
 
   build-and-push:
+    if: ${{ needs.test.result == 'success' }}
+    needs: test
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
