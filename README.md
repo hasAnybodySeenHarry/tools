@@ -53,13 +53,13 @@ To run the app service locally, follow these steps:
 Make sure you have the following installed on your machine:
 
 - [Go](https://golang.org/doc/install): The Go programming language.
-- [Docker](https://www.docker.com/get-started): Docker tools.
+- [Docker](https://www.docker.com/get-started): Docker tools to containerize.
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git): VCS.
 
 #### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repository.git
+git clone https://github.com/hasAnybodySeenHarry/tools.git
 cd your-repository
 ```
 
