@@ -1,0 +1,9 @@
+replicaCount: 2
+image:
+  repository: harry2an/tools
+  tag: latest
+service:
+  port: 80
+  containerPort: 3000
+ingress:
+  enabled: true
