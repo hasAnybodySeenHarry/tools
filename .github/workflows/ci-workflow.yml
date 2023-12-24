@@ -27,8 +27,6 @@ jobs:
     if: ${{ needs.test.result == 'success' }}
     needs: test
     runs-on: ubuntu-latest
-    outputs:
-      image: harry2an/tools:latest
     steps:
     - name: Check out code
       uses: actions/checkout@v3
@@ -50,3 +48,14 @@ jobs:
         push: true
         tags: |
           harry2an/tools:latest
+
+  initiate_cd:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+    - name: Invoke CD workflow
+      uses: peter-evans/repository-dispatch@v2.1.2
+      with:
+        token: ${{ secrets.PAT }}
+        event-type: ci_passed
+        client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "image": "harry2an/tools:latest"}'
