@@ -8,7 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
-	"harryd.com/shop/app/routes"
+	"harryd.com/tools/app/routes"
 )
 
 type MockHomeHandler struct{}
@@ -42,7 +42,7 @@ func TestLoggerMiddleware(t *testing.T) {
 
 	w := httptest.NewRecorder()
 	router.ServeHTTP(w, req)
-	
+
 	assert.Equal(t, http.StatusOK, w.Code)
 	t.Log(w.Body.String())
 }

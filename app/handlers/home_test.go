@@ -25,5 +25,17 @@ func TestHome(t *testing.T) {
 
 	var response map[string]interface{}
 	assert.NoError(t, json.Unmarshal(w.Body.Bytes(), &response))
-	assert.Equal(t, "Let's Go!", response["message"])
+
+	data, ok := response["data"].(map[string]interface{})
+	if !ok {
+		t.Error("Failed to assert 'data' field as a map of string-key and interface-value pairs.")
+	}
+
+	motto, ok := data["motto"].(string)
+	if !ok {
+		t.Error("Failed to assert 'motto' field as string")
+		return
+	}
+
+	assert.Equal(t, "Let's Go!", motto)
 }
