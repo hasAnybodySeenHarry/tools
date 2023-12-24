@@ -1,10 +1,12 @@
 name: CD
 
 on:
-  workflow_run:
-    workflows: ["CI"]
-    types:
-    - completed
+  # workflow_run:
+  #   workflows: ["CI"]
+  #   types:
+  #   - completed
+  repository_dispatch:
+    types: [ci_passed]
 
 jobs:
   echo:
@@ -14,5 +16,5 @@ jobs:
       run: echo "Hello world from CD"
 
     - name: Modify the helm values
-      run: echo "Image is ${{ needs.CI.outputs.image }}"
+      run: echo "Image is ${{ github.event.client_payload.image }}"
   
