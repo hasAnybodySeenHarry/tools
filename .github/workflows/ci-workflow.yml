@@ -56,5 +56,6 @@ jobs:
     - name: Invoke CD workflow
       uses: peter-evans/repository-dispatch@v2.1.2
       with:
+        token: ${{ secrets.GITHUB_TOKEN }}
         event-type: ci_passed
         client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "image": "harry2an/tools:latest"}'
