@@ -60,7 +60,7 @@ Make sure you have the following installed on your machine:
 
 ```bash
 git clone https://github.com/hasAnybodySeenHarry/tools.git
-cd your-repository
+cd tools
 ```
 
 #### Set Up Environment Variables
@@ -71,6 +71,8 @@ Create a .env file in the project root and add the following:
 # replace with your own database details
 DatabaseURL=user:password@tcp(localhost:3306)/db_name
 ```
+If you give your database's name other than `tools`, make sure to modify the ``scripts/init.sql`` as well.
+
 #### Run the service
 
 ```bash
