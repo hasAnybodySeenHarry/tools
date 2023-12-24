@@ -46,6 +46,38 @@ If you need a little warm-up, there are a few resources I can point you to.
 
 ### Installation
 
+To run the app service locally, follow these steps:
+
+#### Environment
+
+Make sure you have the following installed on your machine:
+
+- [Go](https://golang.org/doc/install): The Go programming language.
+- [Docker](https://www.docker.com/get-started): Docker tools.
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git): VCS.
+
+#### Clone the Repository
+
+```bash
+git clone https://github.com/your-username/your-repository.git
+cd your-repository
+```
+
+#### Set Up Environment Variables
+
+Create a .env file in the project root and add the following:
+
+```bash
+# replace with your own database details
+DatabaseURL=user:password@tcp(localhost:3306)/db_name
+```
+#### Run the service
+
+```bash
+go run main.go
+```
+Now you have the `tools` up and running locally! Feel free to explore the API and make changes as needed.
+
 ## Contributing
 
 If you're interested in contributing to this project, please follow the guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).
