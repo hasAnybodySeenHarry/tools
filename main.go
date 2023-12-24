@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	router := gin.Default();
+	router := gin.New();
 	router.Use(middleware.LoggerMiddlware())
 
 	homeHandler := &handlers.HomeHandler{}

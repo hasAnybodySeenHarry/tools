@@ -12,7 +12,7 @@ import (
 
 func TestHome(t *testing.T) {
 	handler := &HomeHandler{}
-	router := gin.Default()
+	router := gin.New()
 	router.GET("/", handler.Home)
 
 	req, err := http.NewRequest(http.MethodGet, "/", nil)

@@ -12,7 +12,7 @@ import (
 
 func TestGetItems(t *testing.T) {
 	handler := NewItemHandler()
-	router := gin.Default()
+	router := gin.New()
 	router.GET("/items", handler.GetItems)
 
 	req, err := http.NewRequest(http.MethodGet, "/items", nil)
@@ -34,7 +34,7 @@ func TestGetItems(t *testing.T) {
 
 func TestGetItemValidID(t *testing.T) {
 	handler := NewItemHandler()
-	router := gin.Default()
+	router := gin.New()
 	router.GET("/items/:itemID", handler.GetItem)
 
 	req, err := http.NewRequest(http.MethodGet, "/items/1", nil)
@@ -55,7 +55,7 @@ func TestGetItemValidID(t *testing.T) {
 
 func TestGetItemInvalidID(t *testing.T) {
 	handler := &ItemHandler{}
-	router := gin.Default()
+	router := gin.New()
 	router.GET("/items/:itemID", handler.GetItem)
 
 	req, err := http.NewRequest(http.MethodGet, "/items/abc", nil)
