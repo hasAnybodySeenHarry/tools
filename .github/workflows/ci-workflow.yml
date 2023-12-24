@@ -27,6 +27,8 @@ jobs:
     if: ${{ needs.test.result == 'success' }}
     needs: test
     runs-on: ubuntu-latest
+    outputs:
+      image: harry2an/tools:latest
     steps:
     - name: Check out code
       uses: actions/checkout@v3
