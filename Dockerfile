@@ -11,7 +11,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 # copy the rest of the application code
-COPY main.go /app/ /scripts/ .
+COPY main.go /app /scripts .
 
 # build the app
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
