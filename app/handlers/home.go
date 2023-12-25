@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"harryd.com/tools/app/models"
+	models "harryd.com/tools/app/models/api"
 )
 
 type HomeHandlerImpl struct{}

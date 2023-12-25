@@ -9,4 +9,7 @@ type HomeHandlerInterface interface {
 type ItemHandlerInterface interface {
 	GetItems(c *gin.Context)
 	GetItem(c *gin.Context)
+	CreateItem(c *gin.Context)
+	UpdateItem(c *gin.Context)
+	DeleteItem(c *gin.Context)
 }

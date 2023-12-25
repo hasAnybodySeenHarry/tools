@@ -16,7 +16,10 @@ func (r *RouterInitializer) InitializeRoutes(router *gin.Engine, homeHandler int
 	itemsGroup := apiV1.Group("/items")
 	r.MiddlewareInterface.SetMiddleware(itemsGroup)
 	{
-		itemsGroup.GET("/items", itemsHandler.GetItems)
-		itemsGroup.GET("/items/:itemID", itemsHandler.GetItem)
+		itemsGroup.GET("/", itemsHandler.GetItems)
+		itemsGroup.GET("/:itemID", itemsHandler.GetItem)
+		itemsGroup.POST("/", itemsHandler.CreateItem)
+		itemsGroup.DELETE("/:itemID", itemsHandler.DeleteItem)
+		itemsGroup.PUT("/:itemID", itemsHandler.UpdateItem)
 	}
 }
