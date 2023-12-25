@@ -22,7 +22,6 @@ FROM alpine:latest
 # set working directory inside final container
 WORKDIR /app
 
-RUN ls
 # copy only the executable from the build container
 COPY --from=build /app/main /app/scripts .
 
