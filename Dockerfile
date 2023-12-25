@@ -22,8 +22,10 @@ FROM alpine:latest
 # set working directory inside final container
 WORKDIR /app
 
+RUN ls -lat
+
 # copy only the executable from the build container
-COPY --from=build /app/main /app/scripts .
+COPY --from=build /app/main .
 
 # expose the port
 EXPOSE 3000
