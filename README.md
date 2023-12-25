@@ -54,6 +54,7 @@ Make sure you have the following installed on your machine:
 - [Go](https://golang.org/doc/install): The Go programming language.
 - [Docker](https://www.docker.com/get-started): Docker tools to containerize.
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git): VCS.
+- [MySQL](https://dev.mysql.com/downloads/mysql): MySQL or any relational db.
 
 #### Clone the Repository
 
