@@ -26,4 +26,5 @@ charts/**/*.tgz
 local_scripts.go
 
 # Environment files
+.env
 database.env
