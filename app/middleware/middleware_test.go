@@ -48,4 +48,6 @@ func TestLoggerMiddleware(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, w.Code)
 	t.Log(w.Body.String())
+
+	// might add some checks for the log
 }
