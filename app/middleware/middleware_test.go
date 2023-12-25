@@ -27,6 +27,18 @@ func (h *MockItemsHandler) GetItems(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"items": []map[string]interface{}{}})
 }
 
+func (h *MockItemsHandler) CreateItem(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"message": "created"})
+}
+
+func (h *MockItemsHandler) DeleteItem(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"message": "deleted"})
+}
+
+func (h *MockItemsHandler) UpdateItem(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"message": "updated"})
+}
+
 func TestLoggerMiddleware(t *testing.T) {
 	var buf bytes.Buffer
 	gin.DefaultWriter = &buf
