@@ -39,7 +39,6 @@ I don't expect you to be an expert in any of the technologies used, but it would
 - Go (Golang)
 - Docker
 - Kubernetes
-- Helm
 - Some CI/CD
 
 If you need a little warm-up, there are a few resources I can point you to.
