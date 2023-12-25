@@ -36,8 +36,8 @@ func TestLoggerMiddleware(t *testing.T) {
 	itemsHandler := &MockItemsHandler{}
 
 	routerInitializer := &routes.RouterInitializer{
-        MiddlewareInterface: &MiddlewareImpl{},
-    }
+		MiddlewareInterface: &MiddlewareImpl{},
+	}
 	routerInitializer.InitializeRoutes(router, homeHandler, itemsHandler)
 
 	req, err := http.NewRequest("GET", "/api/v1/", nil)

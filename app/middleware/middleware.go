@@ -10,7 +10,7 @@ import (
 type MiddlewareImpl struct{}
 
 func (m *MiddlewareImpl) SetMiddleware(group *gin.RouterGroup) {
-    group.Use(LoggerMiddleware())
+	group.Use(LoggerMiddleware())
 }
 
 func LoggerMiddleware() gin.HandlerFunc {

@@ -13,15 +13,23 @@ type AppConfig struct {
 var AppConfigInstance AppConfig
 
 func LoadConfig() {
+	viper.SetConfigFile("app/config/database.env")
+	viper.ReadInConfig()
+
+	// should panic if file is not detected, in production.
+
+	// if err := viper.ReadInConfig(); err != nil {
+	// 	panic(err)
+	// }
+
+	// fallback for development purpose
 	databaseURL := os.Getenv("DATABASE_URL")
 	if databaseURL != "" {
 		AppConfigInstance.DatabaseURL = databaseURL
 		return
 	}
 
-	viper.SetConfigFile("app/.env")
-	viper.ReadInConfig()
-
+	// default
 	viper.SetDefault("DatabaseURL", "user:password@tcp(localhost:3306)/db_name")
 	viper.AutomaticEnv()
 

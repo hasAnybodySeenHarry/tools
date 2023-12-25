@@ -13,8 +13,15 @@ spec:
       labels:
         app: {{ .Chart.Name }}
     spec:
+      volumes:
+      - name: database-config-vol
+        configMap:
+          name: {{ .Release.Name }}-database-config
       containers:
       - name: tools-app
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         ports:
         - containerPort: {{ .Values.service.containerPort }}
+        volumeMounts:
+        - name: database-config-vol
+          mountPath: /app/config

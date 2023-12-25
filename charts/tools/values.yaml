@@ -15,3 +15,6 @@ hpa:
   minReplicas: 1
   maxReplicas: 12
   targetCPUUtilizationPercentage: 55
+
+appConfig:
+  databaseURL: ""

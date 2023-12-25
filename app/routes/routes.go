@@ -6,7 +6,7 @@ import (
 )
 
 type RouterInitializer struct {
-    MiddlewareInterface interfaces.MiddlewareInterface
+	MiddlewareInterface interfaces.MiddlewareInterface
 }
 
 func (r *RouterInitializer) InitializeRoutes(router *gin.Engine, homeHandler interfaces.HomeHandlerInterface, itemsHandler interfaces.ItemHandlerInterface) {

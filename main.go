@@ -46,8 +46,8 @@ func main() {
 	itemsHandler := handlers.NewItemHandler(db)
 
 	routerInitializer := &routes.RouterInitializer{
-        MiddlewareInterface: &middleware.MiddlewareImpl{},
-    }
+		MiddlewareInterface: &middleware.MiddlewareImpl{},
+	}
 
 	routerInitializer.InitializeRoutes(router, homeHandler, itemsHandler)
 

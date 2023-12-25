@@ -101,7 +101,7 @@ func TestGetItemValidID(t *testing.T) {
 
 func TestGetItemInvalidID(t *testing.T) {
 	itemID := 1
-	
+
 	db, mock := setupMockDB(t)
 	defer db.Close()
 
@@ -136,8 +136,8 @@ func TestGetItemNonExistentID(t *testing.T) {
 	defer db.Close()
 
 	mock.ExpectQuery("^SELECT ID, Name FROM items WHERE ID = ?").
-        WithArgs(itemID).
-        WillReturnRows(sqlmock.NewRows([]string{"ID", "Name"}))
+		WithArgs(itemID).
+		WillReturnRows(sqlmock.NewRows([]string{"ID", "Name"}))
 
 	handler := NewItemHandler(db)
 	router := gin.New()
