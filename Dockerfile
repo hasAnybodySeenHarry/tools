@@ -11,7 +11,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 # copy the rest of the application code
-COPY main.go /app /scripts .
+COPY . .
 
 # build the app
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
@@ -22,10 +22,9 @@ FROM alpine:latest
 # set working directory inside final container
 WORKDIR /app
 
-RUN ls -lat
-
+RUN ls
 # copy only the executable from the build container
-COPY --from=build /app/main .
+COPY --from=build /app/main /app/scripts .
 
 # expose the port
 EXPOSE 3000
