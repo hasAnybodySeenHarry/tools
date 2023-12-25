@@ -11,11 +11,11 @@ import (
 )
 
 func TestHome(t *testing.T) {
-	handler := &HomeHandler{}
+	handler := NewHomeHandler()
 	router := gin.New()
-	router.GET("/", handler.Home)
+	router.GET("/api/v1", handler.Home)
 
-	req, err := http.NewRequest(http.MethodGet, "/", nil)
+	req, err := http.NewRequest(http.MethodGet, "/api/v1", nil)
 	assert.NoError(t, err)
 
 	w := httptest.NewRecorder()

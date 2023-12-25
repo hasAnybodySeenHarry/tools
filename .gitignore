@@ -21,3 +21,6 @@
 
 # helm package
 charts/**/*.tgz
+
+# Local helper files
+local_scripts.go

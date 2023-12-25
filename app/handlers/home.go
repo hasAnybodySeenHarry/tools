@@ -7,13 +7,17 @@ import (
 	"harryd.com/tools/app/models"
 )
 
-type HomeHandler struct {}
+type HomeHandlerImpl struct{}
 
-func (h *HomeHandler) Home(ctx *gin.Context) {
+func NewHomeHandler() *HomeHandlerImpl {
+	return &HomeHandlerImpl{}
+}
+
+func (h *HomeHandlerImpl) Home(ctx *gin.Context) {
 	response := models.APIResponse{
-		Status: http.StatusOK,
+		Status:  http.StatusOK,
 		Message: "success",
-		Data: gin.H{"motto": "Let's Go!"},
+		Data:    gin.H{"motto": "Let's Go!"},
 	}
 	ctx.JSON(http.StatusOK, response)
 }

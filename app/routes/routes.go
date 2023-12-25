@@ -5,8 +5,18 @@ import (
 	"harryd.com/tools/app/interfaces"
 )
 
-func InitializeRoutes(router *gin.Engine, homeHandler interfaces.HomeHandlerInterface, itemsHandler interfaces.ItemHandlerInterface) {
-	router.GET("/", homeHandler.Home)
-	router.GET("/items", itemsHandler.GetItems)
-	router.GET("/items/:itemID", itemsHandler.GetItem)
+type RouterInitializer struct {
+    MiddlewareInterface interfaces.MiddlewareInterface
+}
+
+func (r *RouterInitializer) InitializeRoutes(router *gin.Engine, homeHandler interfaces.HomeHandlerInterface, itemsHandler interfaces.ItemHandlerInterface) {
+	apiV1 := router.Group("/api/v1")
+	apiV1.GET("/", homeHandler.Home)
+
+	itemsGroup := apiV1.Group("/items")
+	r.MiddlewareInterface.SetMiddleware(itemsGroup)
+	{
+		itemsGroup.GET("/items", itemsHandler.GetItems)
+		itemsGroup.GET("/items/:itemID", itemsHandler.GetItem)
+	}
 }

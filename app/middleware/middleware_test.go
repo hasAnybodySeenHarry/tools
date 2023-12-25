@@ -31,13 +31,16 @@ func TestLoggerMiddleware(t *testing.T) {
 	var buf bytes.Buffer
 	gin.DefaultWriter = &buf
 	router := gin.Default()
-	router.Use(LoggerMiddlware())
 
 	homeHandler := &MockHomeHandler{}
 	itemsHandler := &MockItemsHandler{}
-	routes.InitializeRoutes(router, homeHandler, itemsHandler)
 
-	req, err := http.NewRequest("GET", "/", nil)
+	routerInitializer := &routes.RouterInitializer{
+        MiddlewareInterface: &MiddlewareImpl{},
+    }
+	routerInitializer.InitializeRoutes(router, homeHandler, itemsHandler)
+
+	req, err := http.NewRequest("GET", "/api/v1/", nil)
 	assert.NoError(t, err)
 
 	w := httptest.NewRecorder()

@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"database/sql"
+	"fmt"
 	"net/http"
 	"regexp"
 	"strconv"
@@ -10,22 +11,23 @@ import (
 	"harryd.com/tools/app/models"
 )
 
-type ItemHandler struct {
+type ItemHandlerImpl struct {
 	db *sql.DB
 }
 
-func NewItemHandler(db *sql.DB) *ItemHandler {
-	return &ItemHandler{db: db}
+func NewItemHandler(db *sql.DB) *ItemHandlerImpl {
+	return &ItemHandlerImpl{db: db}
 }
 
-func (h *ItemHandler) GetItems(ctx *gin.Context) {
+func (h *ItemHandlerImpl) GetItems(ctx *gin.Context) {
 	rows, err := h.db.Query("SELECT * FROM items")
 	if err != nil {
+		fmt.Println(err.Error(), " DB ERROR")
 		handleDatabaseError(ctx, err)
 		return
 	}
 	defer rows.Close()
-	
+
 	items := []models.Item{}
 	for rows.Next() {
 		var item models.Item
@@ -44,7 +46,7 @@ func (h *ItemHandler) GetItems(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
-func (h *ItemHandler) GetItem(ctx *gin.Context) {
+func (h *ItemHandlerImpl) GetItem(ctx *gin.Context) {
 	itemID := ctx.Param("itemID")
 
 	// redundant, may be remove later

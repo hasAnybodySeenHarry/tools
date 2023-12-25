@@ -7,7 +7,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func LoggerMiddlware() gin.HandlerFunc {
+type MiddlewareImpl struct{}
+
+func (m *MiddlewareImpl) SetMiddleware(group *gin.RouterGroup) {
+    group.Use(LoggerMiddleware())
+}
+
+func LoggerMiddleware() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		start := time.Now()
 		ctx.Next()

@@ -24,29 +24,32 @@ func main() {
 	}
 	initScriptPath := filepath.Join(wd, "scripts/init.sql")
 
-    config.LoadConfig()
+	config.LoadConfig()
 
-    db, err := sql.Open("mysql", config.AppConfigInstance.DatabaseURL)
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer db.Close()
+	db, err := sql.Open("mysql", config.AppConfigInstance.DatabaseURL)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
 
-    if err := db.Ping(); err != nil {
-        log.Fatal(err)
-    }
+	if err := db.Ping(); err != nil {
+		log.Fatal(err)
+	}
 
 	if err := runInitScript(db, initScriptPath); err != nil {
-        log.Fatal(err)
-    }
+		log.Fatal(err)
+	}
 
 	router := gin.New()
-	router.Use(middleware.LoggerMiddlware())
 
-	homeHandler := &handlers.HomeHandler{}
+	homeHandler := handlers.NewHomeHandler()
 	itemsHandler := handlers.NewItemHandler(db)
 
-	routes.InitializeRoutes(router, homeHandler, itemsHandler)
+	routerInitializer := &routes.RouterInitializer{
+        MiddlewareInterface: &middleware.MiddlewareImpl{},
+    }
+
+	routerInitializer.InitializeRoutes(router, homeHandler, itemsHandler)
 
 	if err := router.Run(":3000"); err != nil {
 		log.Fatal(err)
@@ -54,23 +57,23 @@ func main() {
 }
 
 func runInitScript(db *sql.DB, filename string) error {
-    content, err := os.ReadFile(filename)
-    if err != nil {
-        return err
-    }
+	content, err := os.ReadFile(filename)
+	if err != nil {
+		return err
+	}
 
 	fmt.Println("SQL Script Content:", string(content))
 
-    statements := strings.Split(string(content), ";")
+	statements := strings.Split(string(content), ";")
 
-    for _, statement := range statements {
+	for _, statement := range statements {
 		if strings.TrimSpace(statement) == "" {
-            continue
-        }
-        if _, err := db.Exec(statement); err != nil {
-            return err
-        }
-    }
+			continue
+		}
+		if _, err := db.Exec(statement); err != nil {
+			return err
+		}
+	}
 
-    return nil
+	return nil
 }
