@@ -15,7 +15,7 @@ A lightweight microservice designed to demonstrate the end-to-end experience of 
 
 ## Introduction
 
-This project is primarily developed in Go, a minimalistic language designed to achieve efficiency and reliability. The service is intentionally kept super simple to make it approachable for beginners.
+This project named `tools` is primarily developed in Go, a minimalistic language designed to achieve efficiency and reliability. At this moment, the service is intentionally kept super simple to have a greater focus on the pipeline.
 
 ## Features
 
@@ -26,7 +26,7 @@ The repository has a couple of directories to focus on, mainly the following:
 - `charts`: Helm charts to build Kubernetes manifests
 - `.githubs`: CI and CD related tasks
 
-There's also a dockerfile to build the container image.
+There's also a `Dockerfile` to build the container image.
 
 ## Getting Started
 
@@ -39,7 +39,6 @@ I don't expect you to be an expert in any of the technologies used, but it would
 - Go (Golang)
 - Docker
 - Kubernetes
-- Helm
 - Some CI/CD
 
 If you need a little warm-up, there are a few resources I can point you to.
