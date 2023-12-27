@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -61,8 +60,6 @@ func runInitScript(db *sql.DB, filename string) error {
 	if err != nil {
 		return err
 	}
-
-	fmt.Println("SQL Script Content:", string(content))
 
 	statements := strings.Split(string(content), ";")
 
