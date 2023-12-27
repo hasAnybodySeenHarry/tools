@@ -8,8 +8,8 @@ import (
 	"os"
 	"sync/atomic"
 
-	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt"
 	api "harryd.com/tools/app/models/api"
 )
 
