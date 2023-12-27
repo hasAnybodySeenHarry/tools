@@ -9,12 +9,13 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - http:
-        paths:
-        - path: /
-          pathType: Exact
-          backend:
-            service:
-              name: {{ .Release.Name }}-service
-              port:
-                number: {{ .Values.service.port }}
+  - host: harryd.com
+  - http:
+      paths:
+      - path: /api/v1/
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Release.Name }}-service
+            port:
+              number: {{ .Values.service.port }}
