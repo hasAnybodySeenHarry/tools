@@ -73,7 +73,7 @@ DatabaseURL=user:password@tcp(localhost:3306)/db_name
 ```
 If you give your database's name other than `tools`, make sure to modify the ``scripts/init.sql`` as well.
 
-Also, create a jwtSecret.json file in the secret folder and populate with a JSON object with an entry of "key": <your-secret>.
+Also, create a jwtSecret.json file in the secret folder and populate with a JSON object with an entry of "key": "secret".
 
 ```bash
 {
