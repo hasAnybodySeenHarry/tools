@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"sync"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -13,12 +14,18 @@ import (
 )
 
 var jwtKey []byte
+var jwtKeyMutex sync.Mutex
 
-func init() {
-	var err error
-	jwtKey, err = loadKey("app/secret/jwtSecret.json")
-	if err != nil {
-		log.Fatal("Failed to load the key:", err)
+func initialize() {
+	jwtKeyMutex.Lock()
+	defer jwtKeyMutex.Unlock()
+
+	if len(jwtKey) == 0 {
+		var err error
+		jwtKey, err = loadKey("app/secret/jwtSecret.json")
+		if err != nil {
+			log.Fatal("Failed to load the key:", err)
+		}
 	}
 }
 
@@ -48,6 +55,7 @@ func loadKey(filePath string) ([]byte, error) {
 
 func AuthMiddleware() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
+		initialize()
 		tokenString := ctx.GetHeader("Authorization")
 
 		if tokenString == "" {
