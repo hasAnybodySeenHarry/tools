@@ -175,8 +175,9 @@ func (h *ItemHandlerImpl) UpdateItem(ctx *gin.Context) {
 		return
 	}
 
-	// without preflight, using mysql, we need to compare to see 
-	// if the data were same or there was no data existed.
+	// without preflight, using mysql, we need to compare to see
+	// if the data were same or there was no data existed if rows
+	// affected was 0.
 	rowsAffected, _ := result.RowsAffected()
 	if rowsAffected == 0 {
 		respondWithError(ctx, http.StatusOK, "data is kept")

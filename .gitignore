@@ -28,3 +28,4 @@ local_scripts.go
 # Environment files
 .env
 database.env
+jwtSecret.json
