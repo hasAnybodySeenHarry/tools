@@ -15,7 +15,7 @@ A lightweight microservice designed to demonstrate the end-to-end experience of 
 
 ## Introduction
 
-This project named `tools` is primarily developed in Go, a minimalistic language designed to achieve efficiency and reliability. At this moment, the service is intentionally kept super simple to have a greater focus on the pipeline.
+`tools` is primarily developed in Go, a minimalistic language designed to achieve efficiency and reliability. At this moment, the service is intentionally kept super simple to have a greater focus on the pipeline.
 
 ## Features
 
@@ -63,9 +63,17 @@ git clone https://github.com/hasAnybodySeenHarry/tools.git
 cd tools
 ```
 
+Also, create a jwtSecret.json file in the secret folder and populate with a JSON object with an entry of "key": <your-secret>.
+
+```bash
+{
+  "key": "your secret jwt token"
+}
+```
+
 #### Set Up Environment Variables
 
-Create a .env file in the project root and add the following:
+Create a database.env file in the app folder and add the following:
 
 ```bash
 # replace with your own database details
