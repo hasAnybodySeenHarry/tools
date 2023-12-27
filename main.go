@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 
 	_ "github.com/go-sql-driver/mysql"
 
@@ -16,24 +17,24 @@ import (
 	"harryd.com/tools/app/routes"
 )
 
+var (
+	homeHandlerMu  sync.Mutex
+	itemsHandlerMu sync.Mutex
+)
+
 func main() {
+	config.LoadConfig()
+
+	go config.WatchConfigChanges()
+
+	db := config.GetDB()
+	defer db.Close()
+
 	wd, err := os.Getwd()
 	if err != nil {
 		log.Fatal(err)
 	}
 	initScriptPath := filepath.Join(wd, "scripts/init.sql")
-
-	config.LoadConfig()
-
-	db, err := sql.Open("mysql", config.AppConfigInstance.DatabaseURL)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer db.Close()
-
-	if err := db.Ping(); err != nil {
-		log.Fatal(err)
-	}
 
 	if err := runInitScript(db, initScriptPath); err != nil {
 		log.Fatal(err)
@@ -53,6 +54,12 @@ func main() {
 	if err := router.Run(":3000"); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func createItemHandler(db *sql.DB) *handlers.ItemHandlerImpl {
+	itemsHandlerMu.Lock()
+	defer itemsHandlerMu.Unlock()
+	return handlers.NewItemHandler(db)
 }
 
 func runInitScript(db *sql.DB, filename string) error {

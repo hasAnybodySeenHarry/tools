@@ -1,8 +1,10 @@
 package config
 
 import (
+	"database/sql"
 	"os"
 
+	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 )
 
@@ -11,6 +13,17 @@ type AppConfig struct {
 }
 
 var AppConfigInstance AppConfig
+var db *sql.DB
+
+func WatchConfigChanges() {
+	viper.WatchConfig()
+	viper.OnConfigChange(func(e fsnotify.Event) {
+		if err := viper.Unmarshal(&AppConfigInstance); err != nil {
+			panic(err)
+		}
+		connectToDB()
+	})
+}
 
 func LoadConfig() {
 	viper.SetConfigFile("app/config/database.env")
@@ -22,14 +35,12 @@ func LoadConfig() {
 	// 	panic(err)
 	// }
 
-	// fallback for development purpose
 	databaseURL := os.Getenv("DATABASE_URL")
 	if databaseURL != "" {
 		AppConfigInstance.DatabaseURL = databaseURL
 		return
 	}
 
-	// default
 	viper.SetDefault("DatabaseURL", "user:password@tcp(localhost:3306)/db_name")
 	viper.AutomaticEnv()
 
@@ -37,4 +48,21 @@ func LoadConfig() {
 	if err := viper.Unmarshal(&AppConfigInstance); err != nil {
 		panic(err)
 	}
+
+	connectToDB()
+}
+
+func connectToDB() {
+	newDB, err := sql.Open("mysql", AppConfigInstance.DatabaseURL)
+	if err != nil {
+		return
+	}
+	if err := newDB.Ping(); err != nil {
+		return
+	}
+	db = newDB
+}
+
+func GetDB() *sql.DB {
+	return db
 }
