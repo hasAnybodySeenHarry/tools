@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"sync"
+	"sync/atomic"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -14,13 +14,10 @@ import (
 )
 
 var jwtKey []byte
-var jwtKeyMutex sync.Mutex
+var jwtKeyInitialized int32
 
 func initialize() {
-	jwtKeyMutex.Lock()
-	defer jwtKeyMutex.Unlock()
-
-	if len(jwtKey) == 0 {
+	if atomic.CompareAndSwapInt32(&jwtKeyInitialized, 0, 1) {
 		var err error
 		jwtKey, err = loadKey("app/secret/jwtSecret.json")
 		if err != nil {
